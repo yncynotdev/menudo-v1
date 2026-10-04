@@ -1,6 +1,5 @@
 package com.example.server.entity;
 
-
 import jakarta.persistence.*;
 
 @Entity
@@ -9,7 +8,7 @@ public class Dishes {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private String id;
+  private Integer id;
 
   @Column(nullable = false)
   private String name;
@@ -21,9 +20,10 @@ public class Dishes {
 
   private String imageKey;
 
-  public Dishes() {}
+  public Dishes() {
+  }
 
-  public Dishes(String id, String name, Float price, Boolean isAvailable, String imageKey) {
+  public Dishes(Integer id, String name, Float price, Boolean isAvailable, String imageKey) {
     this.id = id;
     this.name = name;
     this.price = price;
@@ -31,43 +31,43 @@ public class Dishes {
     this.imageKey = imageKey;
   }
 
-    public String getId() {
-        return id;
-    }
+  public Integer getId() {
+    return id;
+  }
 
-    public void setId(String id) {
-        this.id = id;
-    }
+  public void setId(Integer id) {
+    this.id = id;
+  }
 
-    public String getName() {
-        return name;
-    }
+  public String getName() {
+    return name;
+  }
 
-    public void setName(String name) {
-        this.name = name;
-    }
+  public void setName(String name) {
+    this.name = name;
+  }
 
-    public Float getPrice() {
-        return price;
-    }
+  public Float getPrice() {
+    return price;
+  }
 
-    public void setPrice(Float price) {
-        this.price = price;
-    }
+  public void setPrice(Float price) {
+    this.price = price;
+  }
 
-    public Boolean getAvailable() {
-        return isAvailable;
-    }
+  public Boolean getAvailable() {
+    return isAvailable;
+  }
 
-    public void setAvailable(Boolean available) {
-        isAvailable = available;
-    }
+  public void setAvailable(Boolean available) {
+    isAvailable = available;
+  }
 
-    public String getImageKey() {
-        return imageKey;
-    }
+  public String getImageKey() {
+    return imageKey;
+  }
 
-    public void setImageKey(String imageKey) {
-        this.imageKey = imageKey;
-    }
+  public void setImageKey(String imageKey) {
+    this.imageKey = imageKey;
+  }
 }
