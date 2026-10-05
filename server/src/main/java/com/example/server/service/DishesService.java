@@ -24,14 +24,32 @@ public class DishesService {
         .orElseThrow();
   }
 
-  public Dishes createDishes(Dishes dishes) {
+  public Dishes createDish(Dishes dishes) {
     return dishesRepository.save(dishes);
   }
 
-  public Dishes deleteDishes(Integer id) {
+  public Dishes updateDish(Integer id, Dishes dishes) {
+    Dishes existing = dishesRepository.findById(id).orElseThrow(() -> new RuntimeException("Dish not found."));
+
+    if (dishes.getName() != null) {
+      existing.setName(dishes.getName());
+    }
+
+    if (dishes.getPrice() != null) {
+      existing.setPrice(dishes.getPrice());
+    }
+
+    existing.setImageKey(dishes.getImageKey());
+    existing.setAvailable(dishes.getAvailable());
+
+    return dishesRepository.save(existing);
+  }
+
+  public Dishes deleteDish(Integer id) {
     Dishes dishes = dishesRepository.findById(id)
         .orElseThrow();
     dishesRepository.delete(dishes);
+
     return dishes;
   }
 }

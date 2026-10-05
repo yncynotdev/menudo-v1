@@ -4,7 +4,6 @@ import com.example.server.entity.Dishes;
 import com.example.server.service.DishesService;
 
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -30,12 +29,17 @@ public class DishesController {
   }
 
   @PostMapping
-  public ResponseEntity<Dishes> addDishes(@RequestBody Dishes dishes) {
-    return new ResponseEntity<>(dishesService.createDishes(dishes), HttpStatus.CREATED);
+  public ResponseEntity<Dishes> createDish(@RequestBody Dishes dishes) {
+    return new ResponseEntity<>(dishesService.createDish(dishes), HttpStatus.CREATED);
+  }
+
+  @PatchMapping("/{id}")
+  public ResponseEntity<Dishes> updateDish(@PathVariable Integer id, @RequestBody Dishes dishes) {
+    return ResponseEntity.ok(dishesService.updateDish(id, dishes));
   }
 
   @DeleteMapping("/{id}")
-  public ResponseEntity<Dishes> deleteDishes(@PathVariable Integer id) {
-    return new ResponseEntity<>(dishesService.deleteDishes(id), HttpStatusCode.valueOf(204));
+  public ResponseEntity<Dishes> deleteDish(@PathVariable Integer id) {
+    return new ResponseEntity<>(dishesService.deleteDish(id), HttpStatus.NO_CONTENT);
   }
 }
