@@ -3,10 +3,12 @@ package com.example.server.service;
 import com.example.server.entity.Orders;
 import com.example.server.repository.OrdersRepository;
 import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
+@Service
 public class OrdersService {
 
   private final OrdersRepository ordersRepository;

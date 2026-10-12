@@ -1,13 +1,11 @@
 package com.example.server.controller;
 
-import org.springframework.web.bind.annotation.RestController;
-
 import com.example.server.entity.Orders;
 import com.example.server.service.OrdersService;
 
-import org.springframework.web.bind.annotation.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 

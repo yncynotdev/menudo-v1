@@ -9,6 +9,7 @@ import jakarta.persistence.*;
 public class Orders {
 
   @Id
+  @Column(length = 36)
   private String id;
 
   @Column
@@ -24,21 +25,13 @@ public class Orders {
   private Integer tableNumber;
 
   @Enumerated(EnumType.STRING)
-  @Column(name = "status", nullable = false, columnDefinition = "ENUM('pending', 'preparing', 'served', 'paid', 'cancelled') DEFAULT 'pending'")
+  @Column(name = "status", nullable = false, columnDefinition = "ENUM('PENDING', 'PREPARING', 'SERVED', 'PAID', 'CANCELLED') DEFAULT 'PENDING'")
   private Status status = Status.PENDING;
 
   @Column(nullable = false)
   private Float totalAmount;
 
   public Orders() {
-  }
-
-  public Orders(Integer orderNumber, String customerName, Integer tableNumber, Status status, Float totalAmount) {
-    this.orderNumber = orderNumber;
-    this.customerName = customerName;
-    this.tableNumber = tableNumber;
-    this.status = status;
-    this.totalAmount = totalAmount;
   }
 
   public Orders(String id, Integer orderNumber, String createdAt, String customerName, Integer tableNumber,
