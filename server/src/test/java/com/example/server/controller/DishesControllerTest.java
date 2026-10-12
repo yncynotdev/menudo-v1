@@ -6,12 +6,14 @@ import com.example.server.service.DishesService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.webmvc.test.autoconfigure.WebMvcTest;
+import org.springframework.http.HttpStatus;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.web.server.ResponseStatusException;
 import tools.jackson.databind.ObjectMapper;
 
 import static org.mockito.Mockito.when;
-import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.verify;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
@@ -121,4 +123,11 @@ public class DishesControllerTest {
     verify(dishesService).deleteDish(1);
   }
 
+  @Test
+  void shouldDeleteDishNotFound() throws Exception {
+    doThrow(new ResponseStatusException(HttpStatus.NOT_FOUND, "Dish not found with id " + 999)).when(dishesService)
+        .deleteDish(999);
+
+    mockMvc.perform(delete("/api/dishes/{id}", 999)).andExpect(status().isNotFound());
+  }
 }

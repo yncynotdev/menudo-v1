@@ -2,7 +2,9 @@ package com.example.server.service;
 
 import com.example.server.entity.Dishes;
 import com.example.server.repository.DishesRepository;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -29,7 +31,7 @@ public class DishesService {
   }
 
   public Dishes updateDish(Integer id, Dishes dishes) {
-    Dishes existing = dishesRepository.findById(id).orElseThrow(() -> new RuntimeException("Dish not found."));
+    Dishes existing = dishesRepository.findById(id).orElseThrow(() -> new RuntimeException("Dish not found"));
 
     if (dishes.getName() != null) {
       existing.setName(dishes.getName());
@@ -45,11 +47,11 @@ public class DishesService {
     return dishesRepository.save(existing);
   }
 
-  public Dishes deleteDish(Integer id) {
-    Dishes dishes = dishesRepository.findById(id)
-        .orElseThrow();
-    dishesRepository.delete(dishes);
+  public void deleteDish(Integer id) {
+    Dishes dish = dishesRepository.findById(id)
+        .orElseThrow(() -> new ResponseStatusException(
+            HttpStatus.NOT_FOUND, "Dish not found with id " + id));
 
-    return dishes;
+    dishesRepository.delete(dish);
   }
 }

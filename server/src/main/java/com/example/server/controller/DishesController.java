@@ -39,7 +39,8 @@ public class DishesController {
   }
 
   @DeleteMapping("/{id}")
-  public ResponseEntity<Dishes> deleteDish(@PathVariable Integer id) {
-    return new ResponseEntity<>(dishesService.deleteDish(id), HttpStatus.NO_CONTENT);
+  public ResponseEntity<Void> deleteDish(@PathVariable Integer id) {
+    dishesService.deleteDish(id);
+    return ResponseEntity.noContent().build();
   }
 }
